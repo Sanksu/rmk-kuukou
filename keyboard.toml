@@ -1,35 +1,77 @@
 # Documentation: https://rmk.rs/docs/configuration.html
 [keyboard]
-name = "RMK Keyboard"
-product_name = "RMK Keyboard"
+name = "kuukou"
+product_name = "kuukou"
 vendor_id = 0x4c4b
 product_id = 0x4643
-manufacturer = "RMK"
-chip = "rp2040"
+manufacturer = "Sanksu"
+chip = "nrf52840"
+usb_enable = true
+serial_number = "vial:f64c2b3c"
 
 [matrix]
 # Row and col pins are mandatory
-row_pins = ["PIN_6", "PIN_7", "PIN_8", "PIN_9"]
-col_pins = ["PIN_19", "PIN_20", "PIN_21"]
+row_pins = ["P0_06", "P0_08", "P0_17", "P0_20", "P0_22"]
+col_pins = ["P0_24", "P1_00", "P0_11", "P1_04", "P1_06", "P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
 
 # RMK uses col2row as the default matrix diode direction, if you want to use a row2col matrix, add `row2col = true`
 # row2col = true
 
 [layout]
-rows = 4
-cols = 3
+rows = 5
+cols = 13
 layers = 2
-keymap = [
-    [
-        ["A", "B", "C"],
-        ["Kc1", "Kc2", "Kc3"],
-        ["LCtrl", "MO(1)", "LShift"],
-        ["OSL(1)", "LT(2, Kc9)", "LM(1, LShift | LGui)"]
-    ],
-    [
-        ["_", "TT(1)", "TG(2)"],
-        ["_", "_", "_"],
-        ["_", "_", "_"],
-        ["_", "_", "_"]
-    ],
-]
+matrix_map = """
+(0,0) (0,1) (0,2) (0,3) (0,4) (0,5) (0,6) (0,7) (0,8) (0,9) (0,10) (0,11) (0,12)
+(1,0) (1,1) (1,2) (1,3) (1,4) (1,5) (1,6) (1,7) (1,8) (1,9) (1,10) (1,11) (1,12)
+(2,0) (2,1) (2,2) (2,3) (2,4) (2,5) (2,6) (2,7) (2,8) (2,9) (2,10) (2,11) (2,12)
+(3,0) (3,1) (3,2) (3,3) (3,4) (3,5) (3,6) (3,7) (3,8) (3,9) (3,10) (3,11) (3,12)
+(4,0) (4,1) (4,2) (4,3)       (4,5)       (4,7)       (4,9) (4,10) (4,11) (4,12)
+"""
+
+# layer 0 (default):
+[[layer]]
+name = "layer0"
+keys = """
+1  2  3  4  5  6  7  8  9  0  Minus  Equal  Backspace
+Tab  Q   W  E  R  T  Y  U  I  O  P  LeftBracket  RightBracket
+TO(1)  A  S  D  F  G  H  J  K  L  Semicolon  Quote  Enter
+LShift  Z  X  C  V  B  N  M  Comma  Dot  Slash  Grave  RShift
+LCtrl  LGui  LAlt  Backslash  MO(1)  Space  Left  Up  Down  Right
+"""
+
+
+# layer 1:
+[[layer]]
+name = "layer1"
+keys = """
+Escape  F1  F2  F3  F4  F5  F6  F7  F8  F9  F10  F11  F12
+Tab  Q   W  E  R  T  Y  U  I  O  P  LeftBracket  RightBracket
+TO(0)  A  S  D  F  G  H  J  K  L  Semicolon  Quote  Enter
+LShift  Z  X  C  V  B  N  M  Comma  Dot  Slash  Grave  RShift
+LCtrl  LGui  LAlt  Backslash  MO(0)  Space  Left  Up  Down  Right
+"""
+
+# Ble configuration
+# To use the default configuration, ignore this section completely
+[ble]
+# Whether to enable BLE feature
+enabled = true
+# nRF52 SAADC pin for reading battery level, you can use a pin number or "vddh"
+battery_adc_pin = "vddh"
+# The voltage divider setting for saadc. This setting should be ignored when using "vddh" as the adc pin.
+# For example, nice!nano has 806 + 2M resistors. The saadc measures voltage on the 2M resistor, so the two values should be set to 2000 and 2806
+adc_divider_measured = 2000
+adc_divider_total = 2806
+# Set the BLE tx power; higher means better signal but more power consumption. For nRF52840 the maximum tx power is 8.
+default_tx_power = 0
+# Whether to enable 2M PHY, defaults to true.
+use_2m_phy = true
+# Enable or disable passkey entry, defaults to false
+passkey_entry = false
+# Timeout in seconds for passkey entry, defaults to 120
+passkey_entry_timeout = 120
+# [Deprecated] Pin that reads battery's charging state, `low-active` means the battery is charging when `charge_state.pin` is low
+# charge_state = { pin = "PIN_1", low_active = true }
+# [Deprecated] Output LED pin that blinks when the battery is low
+# charge_led= { pin = "PIN_2", low_active = true }
