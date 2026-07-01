@@ -11,8 +11,8 @@ serial_number = "vial:f64c2b3c"
 
 [matrix]
 # Row and col pins are mandatory
-row_pins = ["P0_06", "P0_08", "P0_17", "P0_20", "P0_22"]
-col_pins = ["P0_24", "P1_00", "P0_11", "P1_04", "P1_06", "P0_09", "P0_10", "P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
+row_pins = ["P1_11", "P1_10", "P0_03", "P0_28", "P1_13"]
+col_pins = ["P0_02", "P0_29", "P0_31", "P0_30", "P0_15", "P0_17", "P0_20", "P0_13", "P0_22", "P0_24", "P1_00", "P1_02", "P1_04"]
 
 # RMK uses col2row as the default matrix diode direction, if you want to use a row2col matrix, add `row2col = true`
 # row2col = true
@@ -51,6 +51,10 @@ TO(0)  A  S  D  F  G  H  J  K  L  Semicolon  Quote  Enter
 LShift  Z  X  C  V  B  N  M  Comma  Dot  Slash  Grave  RShift
 LCtrl  LGui  LAlt  Backslash  Space  MO(0)  Space  RAlt  RCtrl  Left  Up  Down  Right
 """
+
+
+[light]
+capslock = { pin = "PIN_0", low_active = true }
 
 # Ble configuration
 # To use the default configuration, ignore this section completely
